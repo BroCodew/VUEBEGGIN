@@ -1,31 +1,68 @@
 <template>
   <app-header/>
-  <UserProfile
-  :name="data.name"
-  lastName="Doe"
-  :parents="data.parents"
-  />
-  <button @click="updateName">Update Name</button>
-  <Footer />
+<!--  <UserProfile-->
+<!--  :name="data.name"-->
+<!--  lastName="Doe"-->
+<!--  :age="data.age"-->
+<!--  :parents="data.parents"-->
+<!--  :updateAge="updateAge"-->
+<!--  @update-name="updateName"-->
+<!--  />-->
+<!--  <button @click="updateName">Update Name</button>-->
+  <Car :carData="carData"/>
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
-import Footer from "./components/header_footer/footer.vue";
+import {provide, reactive, ref} from "vue";
 import UserProfile from "./components/User/profile.vue"
+import Car from "@/components/Car/car.vue";
 const data = reactive({
   name: "Francis",
   job: "Developer",
+  age: 25,
   parents:{
     father: "John",
     mother: "Jane"
   }
 })
 
-const updateName = () => {
+const carData = reactive([
+  {
+    brand: "Toyota",
+    model: "Corolla",
+    year: 2020
+  },
+  {
+    brand: "Honda",
+    model: "Civic",
+    year: 2019
+  },
+  {
+    brand: "Ford",
+    model: "Fiesta",
+    year: 2018
+  }
+])
+
+const updateName = (value) => {
   console.log("Updating Name",data)
-  data.name = "John";
+  data.name = value;
 }
+
+
+const updateAge = (value) => {
+data.age = value;
+}
+
+const handleUpdateBrand = (value) => {
+  console.log("Updating Brand", value)
+  carData[0].brand = "test";
+}
+
+provide('carDataProvide', {
+  carData,
+  handleUpdateBrand
+})
 
 </script>
 
