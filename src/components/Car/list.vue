@@ -20,4 +20,4 @@ const {carData, handleUpdateBrand} = inject('carDataProvide')
 
 <style scoped>
 
-</style>f
+</style>
